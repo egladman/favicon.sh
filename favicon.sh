@@ -30,10 +30,41 @@ else
   src=$1
 fi
 
-if [ ! -f $src ]; then
+if [ -f $src ]; then
+  dimensions=( $(identify -format '%W %H' $src) )
+else
   echo "${src} doesn't exist. Aborting"
   exit 1
 fi
+
+
+
+for i in "${dimensions[@]}"
+do
+  if [ $i -lt 558 ]; then
+    echo "The image's dimensions are less than the 558x558 recommendations."
+
+    while :
+    do
+	     read -p "Would you like to continue? ( y/N ): " a
+
+       case $a in
+        y)
+          echo "yes"
+          break 2
+          ;;
+        N|n|"")
+          exit 1
+          ;;
+        *)
+          echo "Please enter \"y\" or \"n\""
+          ;;
+        esac
+     done
+
+  fi
+done
+
 
 
 ico=(
