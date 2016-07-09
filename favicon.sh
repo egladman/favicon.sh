@@ -46,10 +46,10 @@ do
 
     while :
     do
-	     read -p "Would you like to continue? ( y/N ): " a
+      read -p "Would you like to continue? ( y/N ): " answer
 
-       case $a in
-        y)
+       case $answer in
+        Y|y)
           echo "yes"
           break 2
           ;;
