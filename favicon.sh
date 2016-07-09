@@ -61,8 +61,8 @@ do
       convert ${src} -resize ${i}x${i} mediumtile.png
       ;;
     558)
+      convert ${src} -resize ${i}x${i} favicon-${i}.png
       convert ${src} -resize ${i}x270 favicon-${i}.png
-      ;;
     *)
       convert ${src} -resize ${i}x${i} favicon-${i}.png
       ;;
