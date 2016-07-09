@@ -1,3 +1,4 @@
+#!/bin/bash
 # A script that generates favicons of *all* variants
 # https://github.com/egladman/favicon.sh
 # Licensed under Apache License 2.0
