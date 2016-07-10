@@ -44,7 +44,7 @@ ico=(
 )
 
 png=(
-  32 57 76 96 120 128 144 152 180 195 196 228 270 558
+  16 24 32 48 57 64 76 96 120 128 144 152 180 195 196 228 270 558
 )
 
 for i in "${dimensions[@]}"
@@ -72,43 +72,49 @@ do
           echo "Please enter \"y\" or \"n\""
           ;;
       esac
-     done
+    done
 
   fi
 done
 
-dir="favicons"
+if [ $(length $2) -eq "0" ]; then
+  dir="favicons"
+else
+  dir=$2
+fi
 
 # create directory if it doesn't exist
 if [ ! -d $dir ]; then
   mkdir $dir
 fi
 
-
-for i in "${ico[@]}"
-do
-  convert $src -resize ${i}x${i} favicons/favicon-${i}.ico
-done
-
 for i in "${png[@]}"
 do
   case ${i} in
     128)
-      convert $src -resize ${i}x${i} favicons/smalltile.png
-      convert $src -resize ${i}x${i} favicons/favicon-${i}.png
+      convert $src -resize ${i}x${i} ${dir}/smalltile.png
+      convert $src -resize ${i}x${i} ${dir}/favicon-${i}.png
       ;;
     270)
-      convert $src -resize ${i}x${i} favicons/mediumtile.png
+      convert $src -resize ${i}x${i} ${dir}/mediumtile.png
       ;;
     558)
-      convert $src -resize ${i}x${i} favicons/largetile.png
-      convert $src -resize ${i}x270 favicons/widetile.png
+      convert $src -resize ${i}x${i} ${dir}/largetile.png
+      convert $src -resize ${i}x270 ${dir}/widetile.png
       ;;
     *)
-      convert $src -resize ${i}x${i} favicons/favicon-${i}.png
+      convert $src -resize ${i}x${i} ${dir}/favicon-${i}.png
       ;;
   esac
 done
 
-# compress .PNGs
+# compress images
 optipng -o2 -strip all $dir/*.png >/dev/null 2>&1
+
+files=()
+for i in "${ico[@]}"
+do
+  files+=($dir/favicon-$i.png)
+done
+
+convert ${files[@]} ${dir}/favicon.ico
