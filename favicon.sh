@@ -109,7 +109,7 @@ do
 done
 
 # compress images
-optipng -o2 -strip all $dir/*.png >/dev/null 2>&1
+optipng -o7 -strip all $dir/*.png >/dev/null 2>&1
 
 files=()
 for i in "${ico[@]}"
