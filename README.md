@@ -1,5 +1,7 @@
 # favicon.sh
-A script that generates favicons of *all* variants.
+A bash script that generates and compresses favicons of *all* variants. It
+requires [ImagMagick](https://www.imagemagick.org) and
+[OptiPNG](http://optipng.sourceforge.net/)
 
 #### Usage
 ```bash

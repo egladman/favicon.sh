@@ -10,6 +10,7 @@
 
 dependencies=(
   "convert"
+  "optipng"
 )
 
 # check if dependencies are indeed installed
@@ -110,3 +111,5 @@ do
       ;;
   esac
 done
+
+optipng -o2 -strip all $dir/*.png >/dev/null 2>&1
