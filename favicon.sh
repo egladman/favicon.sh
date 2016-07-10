@@ -119,7 +119,7 @@ done
 
 convert ${files[@]} ${dir}/favicon.ico
 
-echo -e "
+echo "
 <?xml version="1.0" encoding="utf-8"?>
   <browserconfig>
     <msapplication>
