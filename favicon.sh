@@ -39,7 +39,6 @@ else
   exit 1
 fi
 
-
 ico=(
   16 24 32 48 64
 )
@@ -47,7 +46,6 @@ ico=(
 png=(
   32 57 76 96 120 128 144 152 180 195 196 228 270 558
 )
-
 
 for i in "${dimensions[@]}"
 do
@@ -79,7 +77,6 @@ do
   fi
 done
 
-
 dir="favicons"
 
 # create directory if it doesn't exist
@@ -92,9 +89,6 @@ for i in "${ico[@]}"
 do
   convert $src -resize ${i}x${i} favicons/favicon-${i}.ico
 done
-
-
-
 
 for i in "${png[@]}"
 do
