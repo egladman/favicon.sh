@@ -17,7 +17,7 @@ dependencies=(
 for program in "${dependencies[@]}"
 do
   command -v $program >/dev/null 2>&1 || {
-    echo >&2 "${program} is not installed. Aborting."
+    echo >&2 "$program is not installed. Aborting."
     exit 1
   }
 done
@@ -35,7 +35,7 @@ fi
 if [ -f $src ]; then
   dimensions=( $(identify -format '%W %H' $src) )
 else
-  echo "${src} doesn't exist. Aborting"
+  echo "$src doesn't exist. Aborting"
   exit 1
 fi
 
@@ -90,20 +90,20 @@ fi
 
 for i in "${png[@]}"
 do
-  case ${i} in
+  case $i in
     128)
-      convert $src -resize ${i}x${i} ${dir}/smalltile.png
-      convert $src -resize ${i}x${i} ${dir}/favicon-${i}.png
+      convert $src -resize ${i}x${i} $dir/smalltile.png
+      convert $src -resize ${i}x${i} $dir/favicon-${i}.png
       ;;
     270)
-      convert $src -resize ${i}x${i} ${dir}/mediumtile.png
+      convert $src -resize ${i}x${i} $dir/mediumtile.png
       ;;
     558)
-      convert $src -resize ${i}x${i} ${dir}/largetile.png
-      convert $src -resize ${i}x270 ${dir}/widetile.png
+      convert $src -resize ${i}x${i} $dir/largetile.png
+      convert $src -resize ${i}x270 $dir/widetile.png
       ;;
     *)
-      convert $src -resize ${i}x${i} ${dir}/favicon-${i}.png
+      convert $src -resize ${i}x${i} $dir/favicon-${i}.png
       ;;
   esac
 done
@@ -117,18 +117,19 @@ do
   files+=($dir/favicon-$i.png)
 done
 
-convert ${files[@]} ${dir}/favicon.ico
+convert ${files[@]} $dir/favicon.ico
 
+# generate ieconfig.xml
 echo "
 <?xml version="1.0" encoding="utf-8"?>
   <browserconfig>
     <msapplication>
       <tile>
-        <square70x70logo src="${dir}/smalltile.png"/>
-        <square150x150logo src="${dir}mediumtile.png"/>
-        <wide310x150logo src="${dir}/widetile.png"/>
-        <square310x310logo src="${dir}/largetile.png"/>
+        <square70x70logo src="$dir/smalltile.png"/>
+        <square150x150logo src="$dir/mediumtile.png"/>
+        <wide310x150logo src="$dir/widetile.png"/>
+        <square310x310logo src="$dir/largetile.png"/>
         <TileColor>#FFFFFF</TileColor>
       </tile>
     </msapplication>
-  </browserconfig>" > ${dir}/ieconfig.xml
+  </browserconfig>" > $dir/ieconfig.xml
