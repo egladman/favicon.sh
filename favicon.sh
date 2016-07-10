@@ -118,3 +118,17 @@ do
 done
 
 convert ${files[@]} ${dir}/favicon.ico
+
+echo -e "
+<?xml version="1.0" encoding="utf-8"?>
+  <browserconfig>
+    <msapplication>
+      <tile>
+        <square70x70logo src="${dir}/smalltile.png"/>
+        <square150x150logo src="${dir}mediumtile.png"/>
+        <wide310x150logo src="${dir}/widetile.png"/>
+        <square310x310logo src="${dir}/largetile.png"/>
+        <TileColor>#FFFFFF</TileColor>
+      </tile>
+    </msapplication>
+  </browserconfig>" > ${dir}/ieconfig.xml
