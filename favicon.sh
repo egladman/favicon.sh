@@ -110,4 +110,5 @@ do
   esac
 done
 
+# compress .PNGs
 optipng -o2 -strip all $dir/*.png >/dev/null 2>&1
