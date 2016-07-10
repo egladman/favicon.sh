@@ -40,17 +40,26 @@ else
 fi
 
 
+ico=(
+  16 24 32 48 64
+)
+
+png=(
+  32 57 76 96 120 128 144 152 180 195 196 228 270 558
+)
+
 
 for i in "${dimensions[@]}"
 do
-  if [ $i -lt 558 ]; then
-    echo "The image's dimensions are less than the 558x558 recommendations."
+  if [ $i -lt ${png[-1]} ]; then
+    echo "The image's dimensions are less than the ${png[-1]}x${png[-1]} recommendations."
 
     while :
     do
       read -p "Would you like to continue? ( y/N ): " answer
 
       if [ $(length $answer) -ne 0 ]; then
+        # downcase user input
         answer=${answer,,}
       fi
 
@@ -73,14 +82,11 @@ done
 
 dir="favicons"
 
+# create directory if it doesn't exist
 if [ ! -d $dir ]; then
   mkdir $dir
 fi
 
-
-ico=(
-  16 24 32 48 64
-)
 
 for i in "${ico[@]}"
 do
@@ -88,9 +94,7 @@ do
 done
 
 
-png=(
-  32 57 76 96 120 128 144 152 180 195 196 228 270 558
-)
+
 
 for i in "${png[@]}"
 do
