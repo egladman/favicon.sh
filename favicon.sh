@@ -21,10 +21,11 @@ do
   }
 done
 
+length () {
+  echo -n $1 | wc -c
+}
 
-len=$(echo -n $1 | wc -c)
-
-if [ $len == "0" ]; then
+if [ $(length $1) -eq "0" ]; then
   src="favicon.png"
 else
   src=$1
@@ -48,23 +49,32 @@ do
     do
       read -p "Would you like to continue? ( y/N ): " answer
 
-       case $answer in
-        Y|y)
-          echo "yes"
+      if [ $(length $answer) -ne 0 ]; then
+        answer=${answer,,}
+      fi
+
+      case $answer in
+        y|yes)
           break 2
           ;;
-        N|n|"")
+        n|no|"")
           exit 1
           ;;
         *)
           echo "Please enter \"y\" or \"n\""
           ;;
-        esac
+      esac
      done
 
   fi
 done
 
+
+dir="favicons"
+
+if [ ! -d $dir ]; then
+  mkdir $dir
+fi
 
 
 ico=(
@@ -73,7 +83,7 @@ ico=(
 
 for i in "${ico[@]}"
 do
-  convert ${src} -resize ${i}x${i} favicon-${i}.png
+  convert $src -resize ${i}x${i} favicons/favicon-${i}.ico
 done
 
 
@@ -85,17 +95,18 @@ for i in "${png[@]}"
 do
   case ${i} in
     128)
-      convert ${src} -resize ${i}x${i} smalltile.png
-      convert ${src} -resize ${i}x${i} favicon-${i}.png
+      convert $src -resize ${i}x${i} favicons/smalltile.png
+      convert $src -resize ${i}x${i} favicons/favicon-${i}.png
       ;;
     270)
-      convert ${src} -resize ${i}x${i} mediumtile.png
+      convert $src -resize ${i}x${i} favicons/mediumtile.png
       ;;
     558)
-      convert ${src} -resize ${i}x${i} favicon-${i}.png
-      convert ${src} -resize ${i}x270 favicon-${i}.png
+      convert $src -resize ${i}x${i} favicons/largetile.png
+      convert $src -resize ${i}x270 favicons/widetile.png
+      ;;
     *)
-      convert ${src} -resize ${i}x${i} favicon-${i}.png
+      convert $src -resize ${i}x${i} favicons/favicon-${i}.png
       ;;
   esac
 done
