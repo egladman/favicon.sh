@@ -1,5 +1,11 @@
 # favicon.sh
-A bash script that generates and compresses favicons of *all* variants. I'm by no means a bash expert, so if you see an error in my ways kindly let me know. It requires [ImagMagick](https://www.imagemagick.org) and [OptiPNG](http://optipng.sourceforge.net/).
+A bash script that generates and compresses favicons of *all* variants. I'm by no means a bash expert, so if you see an error in my ways kindly let me know.
+
+<br>
+
+#### Dependencies
+- [ImagMagick](https://www.imagemagick.org)
+- [OptiPNG](http://optipng.sourceforge.net/)
 
 <br>
 
