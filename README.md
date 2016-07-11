@@ -40,6 +40,7 @@ image path
 #### Recommendations
 - The source image should be greater than or equal to `558x558`
 - Use a `.svg` for the source image
+
 <br>
 
 Insert the following html into the head of your file
