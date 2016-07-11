@@ -11,8 +11,24 @@
 red='\033[0;31m'
 orange='\033[0;33m'
 light_green='\033[0;32m'
-light_blue='\033[0;34m'
 nc='\033[0m' # No Color
+
+length () {
+  echo -n $1 | wc -c
+}
+
+success () {
+  echo -e "${light_green}Success: ${nc}$1"
+}
+
+warning () {
+  echo -e "${orange}Warning: ${nc}$1"
+}
+
+error () {
+  echo -e "${red}Error: ${nc}$1 Aborting."
+  exit 1
+}
 
 dependencies=(
   "convert"
@@ -23,14 +39,9 @@ dependencies=(
 for program in "${dependencies[@]}"
 do
   command -v $program >/dev/null 2>&1 || {
-    echo -e >&2 "${red}ERROR: ${nc}$program is not installed. Aborting."
-    exit 1
+    error "$program is not installed."
   }
 done
-
-length () {
-  echo -n $1 | wc -c
-}
 
 # set default image source if argument wasn't passed in
 if [ $(length $1) -eq "0" ]; then
@@ -43,15 +54,14 @@ fi
 if [ -f $source_image ]; then
   dimensions=( $(identify -format '%W %H' $source_image) )
 else
-  echo "$source_image doesn't exist. Aborting"
-  exit 1
+  error "$source_image doesn't exist."
 fi
 
 
 difference=$(expr ${dimensions[0]} - ${dimensions[1]})
 
 if [ $difference -gt 0 ]; then
-  echo -e "${orange}Warning: ${nc}$source_image is not a square image."
+  warning "$source_image is not a square image."
 fi
 
 ico_resolutions=(
@@ -65,7 +75,7 @@ png_resolutions=(
 for i in "${dimensions[@]}"
 do
   if [ $i -lt ${png_resolutions[-1]} ] && [[ ! $source_image =~ \.svg$ ]]; then
-    echo -e "${orange}Warning: ${nc}The image's resolution is less than the recommended ${png_resolutions[-1]}x${png_resolutions[-1]}."
+    warning "The image's resolution is less than the recommended ${png_resolutions[-1]}x${png_resolutions[-1]}."
 
     while :
     do
@@ -156,4 +166,4 @@ echo "
     </msapplication>
   </browserconfig>" > $path/ieconfig.xml
 
-echo -e "${light_green}Success: ${nc}The favicons can be found in $path"
+success "The favicons can be found in $path"
