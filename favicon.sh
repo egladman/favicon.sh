@@ -51,7 +51,7 @@ fi
 difference=$(expr ${dimensions[0]} - ${dimensions[1]})
 
 if [ $difference -gt 0 ]; then
-  echo -e "${orange}Warning: ${nc}$source_image is not square."
+  echo -e "${orange}Warning: ${nc}$source_image is not a square image."
 fi
 
 ico_resolutions=(
