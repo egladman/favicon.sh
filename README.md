@@ -24,7 +24,7 @@ favicons to directory `favicons`.
 - If executed without any arguments the script looks for `favicon.png`. If
 `favicon.png` doesn't exist the script exits.
 
-- Generated favicons are saved in `/favicons` by default
+- Generated favicons are saved in `/favicons`
 
 - Currently you cannot specify a output directory without first specifying an
 image path
@@ -69,5 +69,5 @@ Insert the following html into the head of your file
 <br>
 
 #### Sources
-- [Favicon Cheat Sheet][https://github.com/audreyr/favicon-cheat-sheet]
+- [Favicon Cheat Sheet](https://github.com/audreyr/favicon-cheat-sheet)
 - [Safari Pinned Tab Icons](https://developer.apple.com/library/ios/documentation/AppleApplications/Reference/SafariWebContent/pinnedTabs/pinnedTabs.html)
