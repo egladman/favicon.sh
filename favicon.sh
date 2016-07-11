@@ -156,15 +156,14 @@ convert ${files[@]} $path/favicon.ico
 find $path -type f -name '*[a-z]-[0-2||4||6][0-9].png' -delete
 
 # generate ieconfig.xml as it's needed for Windows
-echo "
-<?xml version=\"1.0\" encoding=\"utf-8\"?>
+echo "<?xml version=\"1.0\" encoding=\"utf-8\"?>
   <browserconfig>
     <msapplication>
       <tile>
-        <square70x70logo src=\"$path/smalltile.png\"/>
-        <square150x150logo src=\"$path/mediumtile.png\"/>
-        <wide310x150logo src=\"$path/widetile.png\"/>
-        <square310x310logo src=\"$path/largetile.png\"/>
+        <square70x70logo src=\"/path/to/smalltile.png\"/>
+        <square150x150logo src=\"/path/to/mediumtile.png\"/>
+        <wide310x150logo src=\"/path/to/widetile.png\"/>
+        <square310x310logo src=\"/path/to/largetile.png\"/>
         <TileColor>#FFFFFF</TileColor>
       </tile>
     </msapplication>
