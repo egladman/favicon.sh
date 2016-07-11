@@ -1,15 +1,21 @@
 # favicon.sh
 A bash script that generates and compresses favicons of *all* variants. I'm by no means a bash expert, so if you see an error in my ways kindly let me know. It requires [ImagMagick](https://www.imagemagick.org) and [OptiPNG](http://optipng.sourceforge.net/).
 
+<br>
+
 #### Usage
 ```bash
 ./favicon.sh <image> <output_directory>
 ```
 
+<br>
+
 #### Example
 ```bash
 ./favicon.sh myImage.png foo
 ```
+
+<br>
 
 #### Default Behavior
 - If executed without a second argument the script defaults to saving the
@@ -22,6 +28,8 @@ favicons to directory `favicons`.
 
 - Currently you cannot specify a output directory without first specifying an
 image path
+
+<br>
 
 #### Recommendations
 - The source image should be greater than or equal to `558x558`
@@ -58,6 +66,7 @@ Insert the following html into the head of your file
 <link rel="icon" type="image/png" href="/path/to/favicon-228.png" sizes="228x228"/>
 ```
 
+<br>
 
 #### Sources
 - [Favicon Cheat Sheet][https://github.com/audreyr/favicon-cheat-sheet]
