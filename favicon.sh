@@ -117,7 +117,7 @@ do
   case $i in
     128)
       convert $source_image -resize ${i}x${i} $path/smalltile.png
-      convert $source_image -resize ${i}x${i} $path/favicon-${i}.png
+      convert $source_image -resize ${i}x${i} $path/favicon-$i.png
       ;;
     270)
       convert $source_image -resize ${i}x${i} $path/mediumtile.png
@@ -127,7 +127,7 @@ do
       convert $source_image -resize ${i}x270 $path/widetile.png
       ;;
     *)
-      convert $source_image -resize ${i}x${i} $path/favicon-${i}.png
+      convert $source_image -resize ${i}x${i} $path/favicon-$i.png
       ;;
   esac
 done
