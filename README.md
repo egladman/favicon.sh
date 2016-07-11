@@ -24,13 +24,10 @@ A bash script that generates and compresses favicons of *all* variants. I'm by n
 <br>
 
 #### Default Behavior
-- If executed without a second argument the script defaults to saving the
-favicons to directory `favicons`.
-
 - If executed without any arguments the script looks for `favicon.png`. If
 `favicon.png` doesn't exist the script exits.
 
-- Generated favicons are saved in `/favicons`
+- Generated favicons are saved to `/favicons` if a second argument isn't provided
 
 - Currently you cannot specify a output directory without first specifying an
 image path
