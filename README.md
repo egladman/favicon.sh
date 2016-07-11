@@ -1,4 +1,4 @@
-# favicon.sh
+# [favicon.sh](https://github.com/egladman/favicon.sh)
 A bash script that generates and compresses favicons of *all* variants. I'm by no means a bash expert, so if you see an error in my ways kindly let me know.
 
 <br>
@@ -39,7 +39,7 @@ image path
 
 #### Recommendations
 - The source image should be greater than or equal to `558x558`
-
+- Use a `.svg` for the source image
 <br>
 
 Insert the following html into the head of your file
