@@ -64,7 +64,7 @@ png_resolutions=(
 
 for i in "${dimensions[@]}"
 do
-  if [ $i -lt ${png_resolutions[-1]} ]; then
+  if [ $i -lt ${png_resolutions[-1]} ] && [[ ! $source_image =~ \.svg$ ]]; then
     echo -e "${orange}Warning: ${nc}The image's resolution is less than the recommended ${png_resolutions[-1]}x${png_resolutions[-1]}."
 
     while :
