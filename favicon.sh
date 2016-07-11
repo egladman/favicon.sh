@@ -8,16 +8,21 @@
 # Usage:
 # ./favicon.sh path/to/myImage.png
 
+red='\033[0;31m'
+orange='\033[0;33m'
+light_blue='\033[0;34m'
+nc='\033[0m' # No Color
+
 dependencies=(
   "convert"
   "optipng"
 )
 
-# check if dependencies are indeed installed
+# check if dependencies are installed
 for program in "${dependencies[@]}"
 do
   command -v $program >/dev/null 2>&1 || {
-    echo >&2 "$program is not installed. Aborting."
+    echo -e >&2 "${red}ERROR: ${nc}$program is not installed. Aborting."
     exit 1
   }
 done
@@ -26,42 +31,51 @@ length () {
   echo -n $1 | wc -c
 }
 
+# set default image source if argument wasn't passed in
 if [ $(length $1) -eq "0" ]; then
-  src="favicon.png"
+  source_image="favicon.png"
 else
-  src=$1
+  source_image=$1
 fi
 
-if [ -f $src ]; then
-  dimensions=( $(identify -format '%W %H' $src) )
+# if the file exists
+if [ -f $source_image ]; then
+  dimensions=( $(identify -format '%W %H' $source_image) )
 else
-  echo "$src doesn't exist. Aborting"
+  echo "$source_image doesn't exist. Aborting"
   exit 1
 fi
 
-ico=(
+
+difference=$(expr ${dimensions[0]} - ${dimensions[1]})
+
+if [ $difference -gt 0 ]; then
+  echo -e "${orange}Warning: ${nc}$source_image is not square."
+fi
+
+ico_resolutions=(
   16 24 32 48 64
 )
 
-png=(
+png_resolutions=(
   16 24 32 48 57 64 76 96 120 128 144 152 180 195 196 228 270 558
 )
 
 for i in "${dimensions[@]}"
 do
-  if [ $i -lt ${png[-1]} ]; then
-    echo "The image's dimensions are less than the ${png[-1]}x${png[-1]} recommendations."
+  if [ $i -lt ${png_resolutions[-1]} ]; then
+    echo -e "${orange}Warning: ${nc}The image's resolution is less than the recommended ${png_resolutions[-1]}x${png_resolutions[-1]}."
 
     while :
     do
-      read -p "Would you like to continue? ( y/N ): " answer
+      read -p "Would you like to continue? ( y/N ): " response
 
-      if [ $(length $answer) -ne 0 ]; then
+      if [ $(length $response) -ne 0 ]; then
         # downcase user input
-        answer=${answer,,}
+        response=${response,,}
       fi
 
-      case $answer in
+      case $response in
         y|yes)
           break 2
           ;;
@@ -73,63 +87,70 @@ do
           ;;
       esac
     done
-
   fi
 done
 
 if [ $(length $2) -eq "0" ]; then
-  dir="favicons"
+  path="favicons"
 else
-  dir=$2
+  path=$2
 fi
 
 # create directory if it doesn't exist
-if [ ! -d $dir ]; then
-  mkdir $dir
+if [ ! -d $path ]; then
+  mkdir $path
 fi
 
-for i in "${png[@]}"
+for i in "${png_resolutions[@]}"
 do
   case $i in
     128)
-      convert $src -resize ${i}x${i} $dir/smalltile.png
-      convert $src -resize ${i}x${i} $dir/favicon-${i}.png
+      convert $source_image -resize ${i}x${i} $path/smalltile.png
+      convert $source_image -resize ${i}x${i} $path/favicon-${i}.png
       ;;
     270)
-      convert $src -resize ${i}x${i} $dir/mediumtile.png
+      convert $source_image -resize ${i}x${i} $path/mediumtile.png
       ;;
     558)
-      convert $src -resize ${i}x${i} $dir/largetile.png
-      convert $src -resize ${i}x270 $dir/widetile.png
+      convert $source_image -resize ${i}x${i} $path/largetile.png
+      convert $source_image -resize ${i}x270 $path/widetile.png
       ;;
     *)
-      convert $src -resize ${i}x${i} $dir/favicon-${i}.png
+      convert $source_image -resize ${i}x${i} $path/favicon-${i}.png
       ;;
   esac
 done
 
+# SVG vector mask for Safari 9+
+convert $source_image -resize 16x16 -colorspace gray $path/icon.svg
+
 # compress images
-optipng -o7 -strip all $dir/*.png >/dev/null 2>&1
+optipng -o7 -strip all $path/*.png >/dev/null 2>&1
 
 files=()
-for i in "${ico[@]}"
+for i in "${ico_resolutions[@]}"
 do
-  files+=($dir/favicon-$i.png)
+  files+=($path/favicon-$i.png)
 done
 
-convert ${files[@]} $dir/favicon.ico
+convert ${files[@]} $path/favicon.ico
 
-# generate ieconfig.xml
+# removes unnecessary images that were only used for the favicon.ico generation
+# NOTE: some versions of "find" don't have the delete option. I might need to
+# refactor the following command to accommodate additional users
+find $path -type f -name '*[a-z]-[0-2||4||6][0-9].png' -delete
+
+# generate ieconfig.xml as it's needed for Windows
 echo "
 <?xml version="1.0" encoding="utf-8"?>
   <browserconfig>
     <msapplication>
       <tile>
-        <square70x70logo src="$dir/smalltile.png"/>
-        <square150x150logo src="$dir/mediumtile.png"/>
-        <wide310x150logo src="$dir/widetile.png"/>
-        <square310x310logo src="$dir/largetile.png"/>
+        <square70x70logo src="$path/smalltile.png"/>
+        <square150x150logo src="$path/mediumtile.png"/>
+        <wide310x150logo src="$path/widetile.png"/>
+        <square310x310logo src="$path/largetile.png"/>
         <TileColor>#FFFFFF</TileColor>
       </tile>
     </msapplication>
-  </browserconfig>" > $dir/ieconfig.xml
+  </browserconfig>" > $path/ieconfig.xml
