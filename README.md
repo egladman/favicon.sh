@@ -86,5 +86,5 @@ Insert the following lines into the head of your file
 
 #### Sources
 - [Favicon Cheat Sheet](https://github.com/audreyr/favicon-cheat-sheet)
-- [Safari Pinned Tab Icons](https://developer.apple.com/library/ios/documentation/AppleApplications/Reference/SafariWebContent/pinnedTabs/pinnedTabs.html)
+- [Apple Developer Docs](https://developer.apple.com/library/ios/documentation/AppleApplications/Reference/SafariWebContent/pinnedTabs/pinnedTabs.html)
 - [Taylor Fausak](http://taylor.fausak.me/2015/01/27/ios-8-web-apps/)
