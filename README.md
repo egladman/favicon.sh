@@ -1,5 +1,7 @@
 # [favicon.sh](https://github.com/egladman/favicon.sh)
-A bash script that generates and compresses favicons of *all* variants. I'm by no means a bash expert, so if you see an error in my ways kindly let me know.
+A bash script that generates and compresses favicons of *all* variants. I'm by
+no means a bash expert, so if you see an error in my ways kindly let me know. I
+have no intention of making this POSIX compliant.
 
 <br>
 
@@ -11,7 +13,7 @@ A bash script that generates and compresses favicons of *all* variants. I'm by n
 
 #### Usage
 ```bash
-./favicon.sh <image> <output_directory>
+./favicon.sh <image> <output_path>
 ```
 
 <br>
