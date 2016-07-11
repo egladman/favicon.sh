@@ -13,10 +13,6 @@ orange='\033[0;33m'
 light_green='\033[0;32m'
 nc='\033[0m' # No Color
 
-length () {
-  echo -n $1 | wc -c
-}
-
 success () {
   echo -e "${light_green}Success: ${nc}$1"
 }
@@ -28,6 +24,10 @@ warning () {
 error () {
   echo -e "${red}Error: ${nc}$1 Aborting."
   exit 1
+}
+
+length () {
+  echo -n $1 | wc -c
 }
 
 dependencies=(
@@ -57,11 +57,11 @@ else
   error "$source_image doesn't exist."
 fi
 
-
+# difference in source images width and height
 difference=$(expr ${dimensions[0]} - ${dimensions[1]})
 
 if [ $difference -gt 0 ]; then
-  warning "$source_image is not a square image."
+  warning "$source_image is not a square image. Favicons will be distorted."
 fi
 
 ico_resolutions=(
@@ -75,14 +75,15 @@ png_resolutions=(
 for i in "${dimensions[@]}"
 do
   if [ $i -lt ${png_resolutions[-1]} ] && [[ ! $source_image =~ \.svg$ ]]; then
-    warning "The image's resolution is less than the recommended ${png_resolutions[-1]}x${png_resolutions[-1]}."
+    min_resolution=${png_resolutions[-1]}x${png_resolutions[-1]}
+    warning "The image's resolution is less than the recommended $min_resolution."
 
     while :
     do
       read -p "Would you like to continue? ( y/N ): " response
 
+      # downcase user input
       if [ $(length $response) -ne 0 ]; then
-        # downcase user input
         response=${response,,}
       fi
 
@@ -101,6 +102,7 @@ do
   fi
 done
 
+# set default output path if second argument wasn't passed in
 if [ $(length $2) -eq "0" ]; then
   path="favicons"
 else
@@ -144,11 +146,13 @@ do
   files+=($path/favicon-$i.png)
 done
 
+# consolidate multiple .png into .ico
 convert ${files[@]} $path/favicon.ico
 
-# removes unnecessary images that were only used for the favicon.ico generation
 # NOTE: some versions of "find" don't have the delete option. I might need to
 # refactor the following command to accommodate additional users
+
+# removes unnecessary images that were only used for the favicon.ico generation
 find $path -type f -name '*[a-z]-[0-2||4||6][0-9].png' -delete
 
 # generate ieconfig.xml as it's needed for Windows
