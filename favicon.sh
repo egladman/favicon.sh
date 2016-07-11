@@ -10,6 +10,7 @@
 
 red='\033[0;31m'
 orange='\033[0;33m'
+light_green='\033[0;32m'
 light_blue='\033[0;34m'
 nc='\033[0m' # No Color
 
@@ -154,3 +155,5 @@ echo "
       </tile>
     </msapplication>
   </browserconfig>" > $path/ieconfig.xml
+
+echo -e "${light_green}Success: ${nc}The favicons can be found in $path"
