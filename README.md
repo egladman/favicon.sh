@@ -4,6 +4,10 @@ no means a bash expert, so if you see an error in my ways kindly let me know.
 
 <br>
 
+![favicon.sh](terminal.gif "favicon.sh")
+
+<br>
+
 #### Support
 - iOS 6+
 - Safari Pinned Tab
