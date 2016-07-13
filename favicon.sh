@@ -11,7 +11,7 @@
 red=$(tput setaf 1)
 green=$(tput setaf 2)
 orange=$(tput setaf 3)
-purple=$(tput smul)
+underline=$(tput smul)
 normal=$(tput sgr0 rmul)
 
 success () {
@@ -213,33 +213,33 @@ printf "<?xml version=\"1.0\" encoding=\"utf-8\"?>
     </msapplication>
   </browserconfig>" > $path/ieconfig.xml
 
-printf '\n%s\n' "${purple}Use the following HTML${normal}" >&2
+printf '\n%s\n' "${underline}Use the following HTML${normal}" >&2
 
 # generate html
 printf '%s\n' "
 <link rel=\"icon\" type=\"image/x-icon\" href=\"/path/to/favicon.ico\" sizes=\"16x16 24x24 32x32 48x48 64x64\">
 <link rel=\"mask-icon\" href=\"/path/to/safari-pinned-tab.svg\" color=\"$color\">
 
-<link rel=\"apple-touch-icon-precomposed\" href=\"/path/to/$path/favicon-57.png\" sizes=\"57x57\">
-<link rel=\"apple-touch-icon-precomposed\" href=\"/path/to/$path/favicon-60.png\" sizes=\"60x60\">
-<link rel=\"apple-touch-icon-precomposed\" href=\"/path/to/$path/favicon-72.png\" sizes=\"72x72\">
-<link rel=\"apple-touch-icon-precomposed\" href=\"/path/to/$path/favicon-76.png\" sizes=\"76x76\">
-<link rel=\"apple-touch-icon-precomposed\" href=\"/path/to/$path/favicon-114.png\" sizes=\"114x114\">
-<link rel=\"apple-touch-icon-precomposed\" href=\"/path/to/$path/favicon-120.png\" sizes=\"120x120\">
-<link rel=\"apple-touch-icon-precomposed\" href=\"/path/to/$path/favicon-144.png\" sizes=\"144x144\">
-<link rel=\"apple-touch-icon-precomposed\" href=\"/path/to/$path/favicon-152.png\" sizes=\"152x152\">
-<link rel=\"apple-touch-icon-precomposed\" href=\"/path/to/$path/favicon-180.png\" sizes=\"180x180\">
+<link rel=\"apple-touch-icon-precomposed\" href=\"/path/to/favicon-57.png\" sizes=\"57x57\">
+<link rel=\"apple-touch-icon-precomposed\" href=\"/path/to/favicon-60.png\" sizes=\"60x60\">
+<link rel=\"apple-touch-icon-precomposed\" href=\"/path/to/favicon-72.png\" sizes=\"72x72\">
+<link rel=\"apple-touch-icon-precomposed\" href=\"/path/to/favicon-76.png\" sizes=\"76x76\">
+<link rel=\"apple-touch-icon-precomposed\" href=\"/path/to/favicon-114.png\" sizes=\"114x114\">
+<link rel=\"apple-touch-icon-precomposed\" href=\"/path/to/favicon-120.png\" sizes=\"120x120\">
+<link rel=\"apple-touch-icon-precomposed\" href=\"/path/to/favicon-144.png\" sizes=\"144x144\">
+<link rel=\"apple-touch-icon-precomposed\" href=\"/path/to/favicon-152.png\" sizes=\"152x152\">
+<link rel=\"apple-touch-icon-precomposed\" href=\"/path/to/favicon-180.png\" sizes=\"180x180\">
 
 <meta name=\"msapplication-TileColor\" content=\"$color\">
-<meta name=\"msapplication-TileImage\" content=\"/path/to/$path/favicon-144.png\">
+<meta name=\"msapplication-TileImage\" content=\"/path/to/favicon-144.png\">
 
 <meta name=\"application-name\" content=\"Foo\">
 <meta name=\"msapplication-tooltip\" content=\"Bar\">
-<meta name=\"msapplication-config\" content=\"/path/to/$path/ieconfig.xml\">
+<meta name=\"msapplication-config\" content=\"/path/to/ieconfig.xml\">
 
-<link rel=\"icon\" type=\"image/png\" href=\"/path/to/$path/favicon-32.png\" sizes=\"32x32\">
-<link rel=\"icon\" type=\"image/png\" href=\"/path/to/$path/favicon-96.png\" sizes=\"96x96\">
-<link rel=\"icon\" type=\"image/png\" href=\"/path/to/$path/favicon-128.png\" sizes=\"128x128\">
-<link rel=\"icon\" type=\"image/png\" href=\"/path/to/$path/favicon-195.png\" sizes=\"195x195\">
-<link rel=\"icon\" type=\"image/png\" href=\"/path/to/$path/favicon-196.png\" sizes=\"196x196\">
-<link rel=\"icon\" type=\"image/png\" href=\"/path/to/$path/favicon-228.png\" sizes=\"228x228\">" >&2
+<link rel=\"icon\" type=\"image/png\" href=\"/path/to/favicon-32.png\" sizes=\"32x32\">
+<link rel=\"icon\" type=\"image/png\" href=\"/path/to/favicon-96.png\" sizes=\"96x96\">
+<link rel=\"icon\" type=\"image/png\" href=\"/path/to/favicon-128.png\" sizes=\"128x128\">
+<link rel=\"icon\" type=\"image/png\" href=\"/path/to/favicon-195.png\" sizes=\"195x195\">
+<link rel=\"icon\" type=\"image/png\" href=\"/path/to/favicon-196.png\" sizes=\"196x196\">
+<link rel=\"icon\" type=\"image/png\" href=\"/path/to/favicon-228.png\" sizes=\"228x228\">" >&2
