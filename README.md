@@ -8,7 +8,7 @@ no means a bash expert, so if you see an error in my ways kindly let me know.
 
 <br>
 
-#### Support
+#### I went out of way to support:
 - iOS 6+
 - Safari Pinned Tab
 - Windows Tiles
