@@ -44,13 +44,14 @@ do
   }
 done
 
-usage="${0##*/} [-h] [-i path/to/image] [-o path/to/directory] [-c #bb0000] [-t 30] -- program to generate favicons
-where:
+usage="${0##*/} [-h] [-i path/to/image] [-o path/to/output] [-c #FFFFFF] [-t 20]
+
+Options:
   -h  show this help text
   -i  path to image (default: favicon.svg)
   -o  set output directory (default: favicons)
-  -c  set background hex color of Windows tiles and Safari pinned tab (default: #0078d7)
-  -t  monochromatic threshold for Safari pinned tab on a scale from 0 to 100 (default: 15)"
+  -c  set background hex color of Windows tiles and safari pinned tab (default: #0078d7)
+  -t  monochrome threshold for safari pinned tab. 0 to 100 (default: 15)"
 
 path="favicons"
 source_image="favicon.svg"
@@ -60,7 +61,7 @@ threshold="15"
 while getopts ':hc:i:t:o:' option; do
   case $option in
     h)
-      printf '%s\n' "$usage" >&2
+      printf '%s\n\n' "$usage" >&2
       exit
       ;;
     i)
@@ -93,7 +94,7 @@ shift $((OPTIND - 1))
 if [ -f $source_image ]; then
   dimensions=( $(identify -format '%W %H' $source_image) )
 else
-  error "$source_image doesn't exist."
+  error "${source_image##*/} doesn't exist."
   exit 1
 fi
 
@@ -101,7 +102,7 @@ fi
 difference=$(expr ${dimensions[0]} - ${dimensions[1]})
 
 if [ $difference -gt 0 ]; then
-  warning "$source_image is not a square image. Favicons will be distorted."
+  warning "${source_image##*/} is not a square image. Favicons will be distorted."
 fi
 
 ico_sizes=(
