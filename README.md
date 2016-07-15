@@ -23,14 +23,15 @@ no means a bash expert, so if you see an error in my ways kindly let me know.
 
 #### Usage
 ```
-./favicon.sh  -i path/to/image -o path/to/directory -c #bb0000
+./favicon.sh  -i path/to/image -o path/to/directory -c #FFFFFF -t 20
 ```
 
 There are *4* options
-- `-h`  show the help text
-- `-i`  path to image (default: favicon.svg)
-- `-o`  set output directory (default: favicons)
-- `-c`  set background hex color of Windows tiles and Safari pinned tab (default: #0078d7)
+-  `-h`  show this help text
+-  `-i`  path to image (default: favicon.svg)
+-  `-o`  set output directory (default: favicons)
+-  `-c`  set background hex color of Windows tiles and safari pinned tab (default: #0078d7)
+-  `-t`  monochrome threshold for safari pinned tab. 0 to 100 (default: 15)"
 
 <br>
 

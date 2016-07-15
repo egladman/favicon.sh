@@ -6,7 +6,7 @@
 # Created by Eli Gladman <eli.gladman@gmail.com>
 #
 # Usage:
-# ./favicon.sh -i image.png -o path/to/directory
+# ./favicon.sh -i path/to/image -o path/to/directory
 
 red=$(tput setaf 1)
 green=$(tput setaf 2)
