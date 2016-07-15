@@ -37,7 +37,7 @@ There are *4* options
 
 #### Example
 ```bash
-./favicon.sh myImage.png foo
+./favicon.sh -i myImage.svg
 ```
 
 <br>
